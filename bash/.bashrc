@@ -18,7 +18,7 @@ PATH=~/Documents/PC/bin:$PATH
 source /usr/share/doc/pkgfile/command-not-found.bash
 
 # Keychain init
-eval $(keychain --eval --noask --nogui -Q --quiet alancienne-ed25519 alancienne-rsa arch-medion-ed25519 arch-medion-rsa gitit-ed25519)
+eval $(keychain --eval --noask --nogui --quiet alancienne-ed25519 alancienne-rsa arch-medion-ed25519 arch-medion-rsa gitit-ed25519)
 
 ## aliases ##
 
