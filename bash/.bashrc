@@ -8,7 +8,7 @@
 # bash prompt (user@host working dir)
 PS1='[\u@\h \W]\$ '
 
-# Add custom folde to $PATH
+# Add custom folder to $PATH
 PATH=~/Documents/PC/bin:$PATH
 
 # enable forward search by disabling flow control (http://stackoverflow.com/a/791800)
@@ -35,8 +35,8 @@ alias mount='mount | column -t'
 # package management
 alias inst='pacaur -S --needed'
 alias maj='pacaur -Syu --devel' 
-alias remove='pacaur -Rn'
-alias purge='pacaur -Rns'
+alias remove='pacaur -Rs'
+alias purge='pacaur -Rsn'
 alias pkginfo='pacaur -Qi'
 alias query='pacaur -Ss'
 alias repinfo='pacaur -Si'
