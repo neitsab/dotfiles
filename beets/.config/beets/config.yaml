@@ -1,0 +1,12 @@
+directory: ~/Musique/beets
+plugins: converter duplicates chroma
+per_disc_numbering: yes
+ui:
+    color: yes
+
+import:
+#    move: yes
+    log: ~/.config/beets/import.log
+paths:
+    multidisc: $albumartist/$year - $album%aunique{}/$disc.$track - $title
+
