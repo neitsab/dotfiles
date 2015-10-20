@@ -10,6 +10,7 @@ PS1='[\u@\h \W]\$ '
 
 # Add custom folder to $PATH
 PATH=~/Documents/PC/bin:$PATH
+EDITOR=nano
 
 # enable forward search by disabling flow control (http://stackoverflow.com/a/791800)
 [[ $- == *i* ]] && stty -ixon
