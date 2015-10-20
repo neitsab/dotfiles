@@ -34,8 +34,8 @@ alias df='df -hT'
 alias mount='mount | column -t'
 
 # package management
-alias inst='pacaur -S --needed'
-alias maj='pacaur -Syu --devel' 
+alias inst='pacaur -S --needed --noedit'
+alias maj='inst -yu --devel' 
 alias remove='pacaur -Rs'
 alias purge='pacaur -Rsn'
 alias pkginfo='pacaur -Qi'
