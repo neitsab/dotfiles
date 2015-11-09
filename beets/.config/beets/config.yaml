@@ -1,5 +1,5 @@
-directory: ~/Musique/beets
-plugins: convert duplicates chroma
+directory: ~/Musique/collection
+plugins: convert duplicates fromfilename chroma
 per_disc_numbering: yes
 ui:
     color: yes
