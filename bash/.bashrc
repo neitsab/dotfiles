@@ -35,7 +35,8 @@ alias mount='mount | column -t'
 
 # package management
 alias inst='pacaur -S --needed --noedit'
-alias maj='inst -yu --devel' 
+alias maj='inst -yu'
+alias maj-dev='maj --devel' 
 alias remove='pacaur -Rs'
 alias purge='pacaur -Rsn'
 alias pkginfo='pacaur -Qi'
