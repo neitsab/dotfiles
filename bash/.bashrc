@@ -23,7 +23,7 @@ eval $(keychain --eval --noask --nogui --quiet alancienne-ed25519 alancienne-rsa
 
 ## aliases ##
 
-# cli work
+# general cli
 alias sudo='sudo '
 alias ls='ls --color=auto'
 alias ll='ls -lah'
@@ -54,9 +54,14 @@ alias start='sudo systemctl start'
 alias stop='sudo systemctl stop'
 alias restart='sudo systemctl restart'
 alias reload='sudo systemctl reload'
+alias sreboot='systemctl reboot'
+alias poweroff='systemctl poweroff'
 
-#alias reboot='systemctl reboot'
-#alias poweroff='systemctl poweroff'
+# git
+alias gs='git status'
+alias gp='git push'
+alias gpl='git pull'
+alias gco='git commit'
 
 # grub
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
