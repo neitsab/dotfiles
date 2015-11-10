@@ -59,9 +59,9 @@ alias poweroff='systemctl poweroff'
 
 # git
 alias gs='git status'
-alias gp='git push'
-alias gpl='git pull'
-alias gco='git commit'
+alias push='git push'
+alias gp='git pull'
+alias gc='git commit'
 
 # grub
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
