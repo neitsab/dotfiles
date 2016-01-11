@@ -76,8 +76,8 @@ alias dl_noal_cap='aria2c --conf-path=/home/neitsab/.aria2/aria2_nofalloc_cap.co
 #alias kvm='qemu-system-x86_64 -cpu host -enable-kvm -m 3G -vga vmware -full-screen'
 
 # morituri
-alias ripit="rip cd rip -O '' -W '/home/neitsab/Musique/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %n' --track-template='%A/%y - %d/%t. %n' -R"
-alias ripit_va="rip cd rip -O '' -W '/home/neitsab/Musique/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %a - %n' --track-template='%A/%y - %d/%t. %a - %n' -R"
+alias ripit="rip cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %n' --track-template='%A/%y - %d/%t. %n'"
+alias ripit_va="rip cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %a - %n' --track-template='%A/%y - %d/%t. %a - %n'"
 
 # youtube-dl
 alias youtube-dl='youtube-dl -o "%(title)s.%(ext)s"'
