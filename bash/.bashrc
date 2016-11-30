@@ -9,9 +9,9 @@
 PS1='[\u@\h \W]\$ '
 
 # Add custom folder to $PATH
-PATH=~/Documents/PC/bin:$PATH
+PATH=~/PC/bin:$PATH
 EDITOR=nano
-AURDEST=
+#AURDEST=
 
 # enable forward search by disabling flow control (http://stackoverflow.com/a/791800)
 [[ $- == *i* ]] && stty -ixon
@@ -32,7 +32,6 @@ alias grep='grep -i --color=auto'
 alias diff='diff -y --suppress-common-lines'
 alias iotop='sudo iotop'
 alias df='df -hT'
-alias mount='mount | column -t'
 
 # package management
 alias inst='pacaur -S --needed --noedit'
@@ -85,3 +84,8 @@ alias youtube-dl='youtube-dl -o "%(title)s.%(ext)s"'
 
 # git
 alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
+
+## Functions ##
+
+function mount() { mount "$@" | column -t ; }
+function dircomp() { tar -I zstd -cf "$1.tar.zst" "$1" ; }
