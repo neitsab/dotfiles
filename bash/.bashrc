@@ -85,6 +85,9 @@ alias youtube-dl='youtube-dl -o "%(title)s.%(ext)s"'
 # git
 alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
 
+# raccoon
+alias raccoon='java -jar /home/neitsab/Téléchargements/Android/apps/apk-download/raccoon-3.7.jar'
+
 ## Functions ##
 
 function mount() { mount "$@" | column -t ; }
