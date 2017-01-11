@@ -91,4 +91,4 @@ alias raccoon='java -jar /home/neitsab/Téléchargements/Android/apps/apk-downlo
 ## Functions ##
 
 function mount() { mount "$@" | column -t ; }
-function dircomp() { tar -I zstd -cf "$1.tar.zst" "$1" ; }
+function compress() { tar -I zstd -cf "$1.tar.zst" "$1" ; }
