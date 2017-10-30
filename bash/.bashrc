@@ -75,12 +75,14 @@ alias dl_noal_cap='aria2c --conf-path=/home/neitsab/.aria2/aria2_nofalloc_cap.co
 # qemu/kvm
 #alias kvm='qemu-system-x86_64 -cpu host -enable-kvm -m 3G -vga vmware -full-screen'
 
-# morituri
-alias ripit="rip cd rip -L whatcd -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %n' --track-template='%A/%y - %d/%t. %n'"
-alias ripit_va="rip cd rip -L whatcd -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %a - %n' --track-template='%A/%y - %d/%t. %a - %n'"
+# whipper
+alias rip="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %n' 
+--track-template='%A/%y - %d/%t. %n'"
+alias rip-va="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %a - %n' 
+--track-template='%A/%y - %d/%t. %a - %n'"
 
 # youtube-dl
-alias youtube-dl='youtube-dl -o "%(title)s.%(ext)s"'
+alias youtube-dl='youtube-dl -f bestvideo[height\<\=\?1080]+bestaudio/best -o "%(title)s.%(ext)s"'
 
 # git
 alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
