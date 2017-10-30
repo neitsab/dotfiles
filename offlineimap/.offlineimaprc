@@ -1,0 +1,39 @@
+[general]
+accounts = OVH_HE, SMS
+
+[Account OVH_HE]
+## Local backup a remote IMAP
+
+localrepository = ovh-he-local
+remoterepository = ovh-he
+status_backend = sqlite
+
+[Repository ovh-he-local]
+type = Maildir
+localfolders = /media/data/mails/ovh_he_offlineimap
+
+[Repository ovh-he]
+type = IMAP
+remotehost = he23.mail.ovh.net
+remoteuser = bastien.traverse@ovh.fr
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Account SMS]
+## Single folder sync between two remote IMAP accounts
+
+localrepository = ovh-he-sms
+remoterepository = easytech
+status_backend = sqlite
+
+[Repository ovh-he-sms]
+type = IMAP
+remotehost = he23.mail.ovh.net
+remoteuser = bastien.traverse@ovh.fr
+folderfilter = lambda folder: folder in ["SMS"]
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Repository easytech]
+type = IMAP
+remotehost = mail.gandi.net
+remoteuser = btraverse@easy-technologie.fr
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
