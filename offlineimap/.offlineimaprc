@@ -1,39 +1,40 @@
 [general]
-accounts = OVH_HE, SMS
+#accounts = EASYTECH, SMS
+accounts= SMS
 
-[Account OVH_HE]
+[Account EASYTECH]
 ## Local backup a remote IMAP
 
-localrepository = ovh-he-local
-remoterepository = ovh-he
-status_backend = sqlite
+localrepository = easy-tech
+remoterepository = easy
+#status_backend = sqlite
 
-[Repository ovh-he-local]
+[Repository easy-tech]
 type = Maildir
-localfolders = /media/data/mails/ovh_he_offlineimap
+localfolders = /media/data/mails/backup/easy-tech_offlineimap
 
-[Repository ovh-he]
+[Repository easy]
 type = IMAP
-remotehost = he23.mail.ovh.net
-remoteuser = bastien.traverse@ovh.fr
+remotehost = mail.gandi.net
+remoteuser = btraverse@easy-technologie.fr
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 [Account SMS]
 ## Single folder sync between two remote IMAP accounts
 
-localrepository = ovh-he-sms
-remoterepository = easytech
-status_backend = sqlite
+localrepository = easytech-sms
+remoterepository = esrevart
+#status_backend = sqlite
 
-[Repository ovh-he-sms]
-type = IMAP
-remotehost = he23.mail.ovh.net
-remoteuser = bastien.traverse@ovh.fr
-folderfilter = lambda folder: folder in ["SMS"]
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-
-[Repository easytech]
+[Repository easytech-sms]
 type = IMAP
 remotehost = mail.gandi.net
 remoteuser = btraverse@easy-technologie.fr
+folderfilter = lambda folder: folder in ["SMS"]
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+[Repository esrevart]
+type = IMAP
+remotehost = mail.gandi.net
+remoteuser = bastien@esrevart.net
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
