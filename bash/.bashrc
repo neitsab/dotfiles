@@ -8,10 +8,10 @@
 # bash prompt (user@host working dir)
 PS1='[\u@\h \W]\$ '
 
-# Add custom folder to $PATH
 export PATH=~/PC/bin:$PATH
-export EDITOR=nano
-#AURDEST=
+export EDITOR=micro
+#export AURDEST=
+export KEYBASE_SYSTEMD=1
 
 # enable forward search by disabling flow control (http://stackoverflow.com/a/791800)
 [[ $- == *i* ]] && stty -ixon
@@ -20,7 +20,7 @@ export EDITOR=nano
 source /usr/share/doc/pkgfile/command-not-found.bash
 
 # Keychain init
-eval $(keychain --eval --noask --nogui --quiet alancienne-ed25519 alancienne-rsa arch-medion-ed25519 arch-medion-rsa gitit-ed25519)
+#eval $(keychain --eval --noask --nogui --quiet alancienne-ed25519 alancienne-rsa arch-medion-ed25519 arch-medion-rsa gitit-ed25519)
 
 ## aliases ##
 
@@ -30,8 +30,9 @@ alias ls='ls --color=auto'
 alias ll='ls -lah'
 alias grep='grep -i --color=auto'
 alias diff='diff -y --suppress-common-lines'
-alias iotop='sudo iotop'
 alias df='df -hT'
+alias nano='micro'
+alias mostused="history | cut -c8- | cut -d' ' -f1 | sort | uniq -c | sort -nr | head -n20"
 
 # package management
 alias inst='pacaur -S --needed --noedit'
@@ -39,10 +40,10 @@ alias maj='inst -yu'
 alias maj-dev='maj --devel' 
 alias remove='pacaur -Rs'
 alias purge='pacaur -Rsn'
-alias pkginfo='pacaur -Qi'
 alias query='pacaur -Ss'
-alias repinfo='pacaur -Si'
 alias search='pacaur -Qs'
+alias repinfo='pacaur -Si'
+alias pkginfo='pacaur -Qi'
 alias orphan='pacaur -Qdtq'
 alias rem_orphan='remove `orphan`'
 
@@ -62,6 +63,7 @@ alias gs='git status'
 alias push='git push'
 alias gp='git pull'
 alias gc='git commit'
+alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
 
 # grub
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
@@ -76,21 +78,18 @@ alias dl_noal_cap='aria2c --conf-path=/home/neitsab/.aria2/aria2_nofalloc_cap.co
 #alias kvm='qemu-system-x86_64 -cpu host -enable-kvm -m 3G -vga vmware -full-screen'
 
 # whipper
-alias rip="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %n' 
---track-template='%A/%y - %d/%t. %n'"
-alias rip-va="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %a - %n' 
---track-template='%A/%y - %d/%t. %a - %n'"
+alias rip="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %n' --track-template='%A/%y - 
+%d/%t. %n'"
+alias rip-va="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%A/%y - %d/%t. %a - %n' --track-template='%A/%y 
+- %d/%t. %a - %n'"
 
 # youtube-dl
 alias youtube-dl='youtube-dl -f bestvideo[height\<\=\?1080]+bestaudio/best -o "%(title)s.%(ext)s"'
-
-# git
-alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
 
 # raccoon
 alias raccoon='java -jar /home/neitsab/Téléchargements/Android/apps/apk-download/raccoon-3.7.jar'
 
 ## Functions ##
 
-function mount() { mount "$@" | column -t ; }
 function compress() { tar -I zstd -cf "$1.tar.zst" "$1" ; }
+function ytm() { mpv --no-video --ytdl-format=bestaudio ytdl://ytsearch:"$@" ; }
