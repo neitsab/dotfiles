@@ -1,0 +1,96 @@
+## Common aliases between Zsh and Bash
+
+### General CLI
+
+alias sudo='sudo '
+alias ls='ls --color=auto'
+alias ll='ls -lah --time-style=long-iso'
+alias lh='ll -c -lt -r'
+alias grep='grep -i --color=auto'
+alias diff='diff -y --suppress-common-lines'
+alias df='df -hT -x devtmpfs -x tmpfs'
+alias lsblk='lsblk -o NAME,TYPE,SIZE,LABEL,FSTYPE,MOUNTPOINT'
+alias rsync-perfect='rsync -aHAXSh --info=progress2 --partial'
+
+command -v micro >/dev/null && alias nano='micro'
+
+### Package management
+
+if [[ -x /usr/bin/pacaur ]]; then
+    alias inst='pacaur -S --needed --noedit'
+    alias maj='inst -yu'
+    alias maj-dev='maj --devel' 
+    alias remove='pacaur -Rs'
+    alias purge='pacaur -Rsn'
+    alias query='pacaur -Ss'
+    alias search='pacaur -Qs'
+    alias repinfo='pacaur -Si'
+    alias pkginfo='pacaur -Qi'
+    alias orphan='pacaur -Qdtq'
+    alias rem_orphan='remove `orphan`'
+elif [[ ! -x /usr/bin/pacaur && -x /usr/bin/pacman ]]; then
+    alias inst='pacman -S --needed --noedit'
+    alias maj='inst -yu'
+    alias maj-dev='maj --devel' 
+    alias remove='pacman -Rs'
+    alias purge='pacman -Rsn'
+    alias query='pacman -Ss'
+    alias search='pacman -Qs'
+    alias repinfo='pacman -Si'
+    alias pkginfo='pacman -Qi'
+    alias orphan='pacman -Qdtq'
+    alias rem_orphan='remove `orphan`'
+elif [[ -x /usr/bin/apt ]]; then
+    alias inst='sudo apt install'
+    alias maj='sudo apt update && sudo apt dist-upgrade'
+fi
+
+### systemd
+
+alias enable='sudo systemctl enable'
+alias disable='sudo systemctl disable'
+alias status='systemctl status'
+alias start='sudo systemctl start'
+alias stop='sudo systemctl stop'
+alias restart='sudo systemctl restart'
+alias reload='sudo systemctl reload'
+alias sreboot='systemctl reboot'
+alias poweroff='systemctl poweroff'
+
+### aria2
+
+alias dl='aria2c'
+alias dl_meta='dl --conf-path=/home/neitsab/.aria2/metadata2torrent.conf'
+alias dl_cap='aria2c --conf-path=/home/neitsab/.aria2/aria2_cap.conf'
+alias dl_noal='aria2c --conf-path=/home/neitsab/.aria2/aria2_nofalloc.conf'
+alias dl_noal_cap='aria2c --conf-path=/home/neitsab/.aria2/aria2_nofalloc_cap.conf'
+
+### git
+
+alias gs='git status'
+alias gc='git commit'
+alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
+
+### grub
+
+alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+
+### qemu/kvm
+
+#alias kvm='qemu-system-x86_64 -cpu host -enable-kvm -m 3G -vga vmware -full-screen'
+
+### raccoon
+
+alias raccoon='java -jar /home/neitsab/Téléchargements/Android/apps/apk-download/raccoon-3.7.jar'
+
+### whipper
+
+alias rip="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%%A/%%y - %%d/%%t. %%n' --track-template='%%A/%%y - 
+%%d/%%t. %%n'"
+alias rip-va="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%%A/%%y - %%d/%%t. %%a - %%n' --track-template='%%A/%%y 
+- %%d/%%t. %%a - %%n'"
+
+### youtube-dl
+
+alias youtube-dl='youtube-dl -f bestvideo\[height\<\=\?1080\]\+bestaudio\/best -o "%(title)s.%(ext)s"'
+
