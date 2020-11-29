@@ -10,7 +10,7 @@ alias grep='grep -i --color=auto'
 alias diff='diff -y --suppress-common-lines'
 alias df='df -hT -x devtmpfs -x tmpfs'
 alias lsblk='lsblk -o NAME,TYPE,SIZE,LABEL,FSTYPE,MOUNTPOINT'
-alias rsync-perfect='rsync -aHAXSh --info=progress2 --partial'
+alias rsync-perfect='sudo rsync -aHAXSKh --info=progress2 --partial'
 
 command -v micro >/dev/null && alias nano='micro'
 
@@ -67,7 +67,7 @@ alias dl_noal_cap='aria2c --conf-path=/home/neitsab/.aria2/aria2_nofalloc_cap.co
 
 ### git
 
-alias gs='git status'
+#alias gs='git status'
 alias gc='git commit'
 alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
 
@@ -85,10 +85,8 @@ alias raccoon='java -jar /home/neitsab/Téléchargements/Android/apps/apk-downlo
 
 ### whipper
 
-alias rip="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%%A/%%y - %%d/%%t. %%n' --track-template='%%A/%%y - 
-%%d/%%t. %%n'"
-alias rip-va="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%%A/%%y - %%d/%%t. %%a - %%n' --track-template='%%A/%%y 
-- %%d/%%t. %%a - %%n'"
+alias rip="whipper cd rip"
+alias rip-va="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%%A/%%y - %%d/%%t. %%a - %%n' --track-template='%%A/%%y - %%d/%%t. %%a - %%n'"
 
 ### youtube-dl
 
