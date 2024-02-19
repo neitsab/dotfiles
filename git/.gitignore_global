@@ -1,6 +1,0 @@
-## Globally ignored patterns for git repositories
-##
-## See also https://help.github.com/articles/ignoring-files/#create-a-global-gitignore for other suggestions
-
-## GNU/Linux backup files
-*~

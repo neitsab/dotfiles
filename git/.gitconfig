@@ -1,18 +1,40 @@
 [user]
-	email = bastien@traverse.email
+	email = neitsab@esrevart.net
 	name = Bastien Traverse
 [credential]
-	helper = cache --timeout=3600
+	helper = libsecret
 [core]
-	editor = nano
+	editor = micro
 	autocrlf = input
 	excludesfile = /home/neitsab/.gitignore_global
 	quotePath = false
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
-	ui = auto
+	ui = true
 [log]
 	date = iso8601
 [diff]
 	tool = meld
 [push]
 	default = simple
+[alias]
+	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter 'export GIT_COMMITTER_DATE=\"$GIT_AUTHOR_DATE\"' --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
+[init]
+	defaultBranch = main
+[interactive]
+	diffFilter = diff-so-fancy --patch
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+	func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[pull]
+	rebase = true
