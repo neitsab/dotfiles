@@ -5,90 +5,108 @@
 alias sudo='sudo '
 alias ls='ls --color=auto'
 alias ll='ls -lah --time-style=long-iso'
-alias lh='ll -c -lt -r'
 alias grep='grep -i --color=auto'
 alias diff='diff -y --suppress-common-lines'
 alias df='df -hT -x devtmpfs -x tmpfs'
 alias lsblk='lsblk -o NAME,TYPE,SIZE,LABEL,FSTYPE,MOUNTPOINT'
-alias rsync-perfect='sudo rsync -aHAXSKh --info=progress2 --partial'
+alias rsync-perfect='sudo rsync -aHAXShUU --info=progress2 --partial'
+alias oci-rsync='rsync -aHAXShUU --info=progress2 --partial --rsync-path="sudo rsync"'
+alias cp='cp --reflink=auto'
+alias mksrcinfo='makepkg --printsrcinfo > .SRCINFO'
+alias ssh-forget='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
+
+### Core utils replacements
 
 command -v micro >/dev/null && alias nano='micro'
+alias edit=$EDITOR
+#command -v bat >/dev/null && alias cat='bat'
 
 ### Package management
 
-if [[ -x /usr/bin/pacaur ]]; then
-    alias inst='pacaur -S --needed --noedit'
-    alias maj='inst -yu'
-    alias maj-dev='maj --devel' 
-    alias remove='pacaur -Rs'
-    alias purge='pacaur -Rsn'
-    alias query='pacaur -Ss'
-    alias search='pacaur -Qs'
-    alias repinfo='pacaur -Si'
-    alias pkginfo='pacaur -Qi'
-    alias orphan='pacaur -Qdtq'
-    alias rem_orphan='remove `orphan`'
-elif [[ ! -x /usr/bin/pacaur && -x /usr/bin/pacman ]]; then
-    alias inst='pacman -S --needed --noedit'
-    alias maj='inst -yu'
-    alias maj-dev='maj --devel' 
-    alias remove='pacman -Rs'
-    alias purge='pacman -Rsn'
-    alias query='pacman -Ss'
-    alias search='pacman -Qs'
-    alias repinfo='pacman -Si'
-    alias pkginfo='pacman -Qi'
-    alias orphan='pacman -Qdtq'
-    alias rem_orphan='remove `orphan`'
-elif [[ -x /usr/bin/apt ]]; then
-    alias inst='sudo apt install'
-    alias maj='sudo apt update && sudo apt dist-upgrade'
+if command -v yay &>/dev/null; then
+  pm="yay"
+elif command -v pacman &>/dev/null; then
+  pm="pacman"
+else
+  echo "Unsupported package manager"
 fi
+
+alias inst="$pm -S --needed"
+alias asdeps='inst --asdeps'
+alias maj='inst -yu'
+alias majaur='yay -Sua'
+alias maj-dev='majaur --devel'
+alias remove='sudo pacman -Rs'
+alias purge='sudo pacman -Rsn'
+alias query="$pm -Ss"
+alias search='pacman -Qs'
+alias repinfo="$pm -Si"
+alias pkginfo='pacman -Qi'
+alias whose='pacman -Qo'
+alias orphan='pacman -Qdtq'
+alias rem_orphan="pacman -Qtdq | sudo pacman -Rns -"
+# alias rem_orphan='yay -Yc'
+alias cleancache="$pm -Sc"
 
 ### systemd
 
-alias enable='sudo systemctl enable'
-alias disable='sudo systemctl disable'
+alias sctl='sudo systemctl'
+alias usctl='systemctl --user'
+alias enable='sctl enable'
+alias disable='sctl disable'
 alias status='systemctl status'
-alias start='sudo systemctl start'
-alias stop='sudo systemctl stop'
-alias restart='sudo systemctl restart'
-alias reload='sudo systemctl reload'
+alias start='sctl start'
+alias stop='sctl stop'
+alias restart='sctl restart'
+alias reload='sctl reload'
 alias sreboot='systemctl reboot'
 alias poweroff='systemctl poweroff'
-
-### aria2
-
-alias dl='aria2c'
-alias dl_meta='dl --conf-path=/home/neitsab/.aria2/metadata2torrent.conf'
-alias dl_cap='aria2c --conf-path=/home/neitsab/.aria2/aria2_cap.conf'
-alias dl_noal='aria2c --conf-path=/home/neitsab/.aria2/aria2_nofalloc.conf'
-alias dl_noal_cap='aria2c --conf-path=/home/neitsab/.aria2/aria2_nofalloc_cap.conf'
+alias jctl='journalctl -o short-iso'
 
 ### git
 
-#alias gs='git status'
+alias gss='git status'
 alias gc='git commit'
+alias gp="git push"
+alias gpu="git pull"
 alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
-
-### grub
-
-alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+alias gdif='git diff'
 
 ### qemu/kvm
 
 #alias kvm='qemu-system-x86_64 -cpu host -enable-kvm -m 3G -vga vmware -full-screen'
 
-### raccoon
-
-alias raccoon='java -jar /home/neitsab/Téléchargements/Android/apps/apk-download/raccoon-3.7.jar'
-
-### whipper
-
-alias rip="whipper cd rip"
-alias rip-va="whipper cd rip -O '' -W '/home/neitsab/Musique/staging/Collection Flac/Mes rips/' --disc-template='%%A/%%y - %%d/%%t. %%a - %%n' --track-template='%%A/%%y - %%d/%%t. %%a - %%n'"
-
 ### youtube-dl
 
-alias youtube-dl='youtube-dl -f bestvideo\[height\<\=\?1080\]\+bestaudio\/best -o "%(title)s.%(ext)s"'
+# make sure any program still calling youtube-dl gets redirected
+alias youtube-dl='yt-dlp'
 
+# common options that I always want
+alias ytdl='yt-dlp --no-mtime --embed-metadata --no-embed-info-json --embed-thumbnail --concurrent-fragments 5 --merge-output-format "mkv" -o "%(uploader)s - %(upload_date)s - %(title)s.%(ext)s"'
+
+# parallel downloading
+alias ytdlx='ytdl --external-downloader aria2c --external-downloader-args "-j 8 -s 8 -x 8 -k 5M"'
+
+# download music
+alias ytdlm='ytdl -f "258/251/22/256/140/250/18/249/139" -o "%(title)s.%(ext)s"'
+# alter: --format "(bestaudio[acodec^=opus]/bestaudio)/best"
+
+# "will only choose combinations that fit either WebM (VP8/VP9+Vorbis/Opus) or MP4 (H.264+AAC)"
+alias ytdlv='ytdl -f "bestvideo[ext=webm]+251/bestvideo[ext=mp4]+(258/256/140)/bestvideo[ext=webm]+(250/249)/best"'
+# old -f bestvideo\[height\<\=\?1080\]\+bestaudio\/best
+
+# archiving
+# see https://github.com/TheFrenchGhosty/TheFrenchGhostys-Ultimate-YouTube-DL-Scripts-Collection/blob/master/scripts/Archivist%20Scripts/Archivist%20Scripts%20(No%20Comments)/Unique/Unique.sh
+# and https://gist.github.com/AgentOak/34d47c65b1d28829bb17c24c04a0096f#yt-dlp-usage-example
+alias ytdl-archive='ytdl --no-overwrites --parse-metadata "%(title)s:%(meta_title)s" --parse-metadata "%(uploader)s:%(meta_artist)s"'
+alias ytdl-archive-desc='ytdl-archive --write-description'
+alias ytdl-archive-sub='ytdl-archive --write-sub --sub-format "srt/ass/best" --sub-lang en,fr --embed-subs'
+alias ytdl-archive-all='ytdl-archive --write-sub --sub-format "srt/ass/best" --sub-lang en,fr --embed-subs --write-description --write-info-json --write-annotations --write-thumbnail'
+
+### ffmpeg
+
+alias ffmpeg='ffmpeg -hide_banner'
+
+### phoronix-test-suite
+
+alias pts="phoronix-test-suite"
