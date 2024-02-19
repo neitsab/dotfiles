@@ -3,8 +3,8 @@
 if [ -f ~/.env ]; then
     source $HOME/.env
   else
-    export PATH=~/PC/bin:$PATH
-    export EDITOR=micro
-    #export AURDEST=
-    export KEYBASE_SYSTEMD=1
+#    export PATH=~/PC/bin:$PATH
+#    export EDITOR=micro
+#    export GOPATH=~/.go
+#    export KEYBASE_SYSTEMD=1
 fi
