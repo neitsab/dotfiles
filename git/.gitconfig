@@ -6,7 +6,7 @@
 [core]
 	editor = micro
 	autocrlf = input
-	excludesfile = /home/neitsab/.gitignore_global
+	# excludesfile = /home/neitsab/.gitignore_global
 	quotePath = false
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
@@ -15,8 +15,13 @@
 	date = iso8601
 [diff]
 	tool = meld
+	algorithm = histogram
+	submodule = log
+	colorMoved = default
+	colorMovedWS = allow-indentation-change
 [push]
 	default = simple
+	autosetupremote = true
 [alias]
 	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter 'export GIT_COMMITTER_DATE=\"$GIT_AUTHOR_DATE\"' --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f"
 [init]
@@ -38,3 +43,22 @@
 	whitespace = red reverse
 [pull]
 	rebase = true
+[merge]
+	conflictStyle = zdiff3
+	tool = meld
+[help]
+	autocorrect = prompt
+[transfer]
+	fsckobjects = true
+[fetch]
+	fsckobjects = true
+[receive]
+	fsckObjects = true
+[status]
+	submoduleSummary = true
+[submodule]
+	recurse = true
+[branch]
+	sort = -committerdate
+[tag]
+	sort = taggerdate
