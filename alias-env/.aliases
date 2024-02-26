@@ -69,7 +69,8 @@ alias gss='git status'
 alias gc='git commit'
 alias gp="git push"
 alias gpu="git pull"
-alias glog='git log --graph --decorate --pretty=oneline --abbrev-commit'
+alias glog='git log --decorate --pretty=oneline --abbrev-commit'
+alias grog='glog --graph'
 alias gdif='git diff'
 
 ### qemu/kvm
