@@ -13,7 +13,10 @@ alias rsync-perfect='sudo rsync -aHAXShUU --info=progress2 --partial'
 alias oci-rsync='rsync -aHAXShUU --info=progress2 --partial --rsync-path="sudo rsync"'
 alias cp='cp --reflink=auto'
 alias mksrcinfo='makepkg --printsrcinfo > .SRCINFO'
-alias ssh-forget='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
+alias ssh-forget='ssh -o UserKnownHostsFile=/dev/null'
+alias ssh-forget-pass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
+alias ssh-old='ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -o HostkeyAlgorithms=+ssh-rsa'
+alias ipa='ip -c -br a'
 
 ### Core utils replacements
 
