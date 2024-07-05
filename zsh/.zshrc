@@ -73,7 +73,9 @@ source $HOME/.aliases
 function compress { tar -I zstd -cf "$1.tar.zst" "$@" }
 function decompress { tar -I zstd -xf "$@" }
 function mpva { mpv --no-video --ytdl-format=bestaudio ytdl://ytsearch:"$@" }
-function shrinkpdf { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=reduced-"$1" "$1" }
+function shrinkpdf-low { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=shrunk-"$1" "$1" }
+function shrinkpdf-mid { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=shrunk-"$1" "$1" }
+function shrinkpdf-high { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=shrunk-"$1" "$1" }
 
 # urlencode() {
     # setopt localoptions extendedglob
