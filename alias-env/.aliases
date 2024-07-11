@@ -54,7 +54,7 @@ alias cleancache="$pm -Sc"
 ### systemd
 
 alias sctl='sudo systemctl'
-alias usctl='systemctl --user'
+alias uctl='systemctl --user'
 alias enable='sctl enable'
 alias disable='sctl disable'
 alias status='systemctl status'
@@ -62,8 +62,8 @@ alias start='sctl start'
 alias stop='sctl stop'
 alias restart='sctl restart'
 alias reload='sctl reload'
-alias sreboot='systemctl reboot'
-alias poweroff='systemctl poweroff'
+alias sreboot='sctl reboot'
+alias poweroff='sctl poweroff'
 alias jctl='journalctl -o short-iso'
 
 ### git
