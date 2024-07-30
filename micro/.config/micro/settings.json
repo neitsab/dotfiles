@@ -1,5 +1,9 @@
 {
+    "/etc/*": {
+        "filetype": "ini"
+    },
     "autoclose": false,
     "mkparents": true,
-    "softwrap": true
+    "softwrap": true,
+    "wordwrap": true
 }
