@@ -5,5 +5,7 @@
     "autoclose": false,
     "mkparents": true,
     "softwrap": true,
+    "tabsize": 2,
+    "tabstospaces": true,
     "wordwrap": true
 }
