@@ -55,9 +55,15 @@ export HISTTIMEFORMAT="[%F %T] "
 unsetopt HIST_IGNORE_SPACE
 
 # skip duplicates when searching history (but still write them to file)
-# and Remove superfluous blanks from each command line being added to the history list
+# and remove superfluous blanks from each command line being added to the history list
 setopt HIST_FIND_NO_DUPS HIST_REDUCE_BLANKS
 
+## Autocomplete: command prediction from history
+is4 && zrcautoload predict-on && \
+zle -N predict-on         && \
+zle -N predict-off        && \
+bindkey "^X^Z" predict-on && \
+bindkey "^Z" predict-off
 
 ## syntax highlighting
 # https://wiki.archlinux.org/index.php/Zsh#Fish-like_syntax_highlighting
