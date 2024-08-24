@@ -1,6 +1,6 @@
-## Common aliases between Zsh and Bash
+# Common aliases between Zsh and Bash
 
-### General CLI
+## General CLI
 
 alias sudo='sudo '
 alias ls='ls --color=auto'
@@ -9,14 +9,15 @@ alias grep='grep -i --color=auto'
 alias diff='diff -y --suppress-common-lines'
 alias df='df -hT -x devtmpfs -x tmpfs'
 alias lsblk='lsblk -o NAME,TYPE,SIZE,LABEL,FSTYPE,MOUNTPOINT'
+alias cp='cp --reflink=auto'
+alias ipa='ip -c -br a'
+
 alias rsync-perfect='sudo rsync -aHAXShUU --info=progress2 --partial'
 alias oci-rsync='rsync -aHAXShUU --info=progress2 --partial --rsync-path="sudo rsync"'
-alias cp='cp --reflink=auto'
-alias mksrcinfo='makepkg --printsrcinfo > .SRCINFO'
+
 alias ssh-forget='ssh -o UserKnownHostsFile=/dev/null'
 alias ssh-forget-pass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
 alias ssh-old='ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -o HostkeyAlgorithms=+ssh-rsa'
-alias ipa='ip -c -br a'
 
 ### Core utils replacements
 
@@ -24,34 +25,44 @@ command -v micro >/dev/null && alias nano='micro'
 alias edit=$EDITOR
 #command -v bat >/dev/null && alias cat='bat'
 
-### Package management
+## Package management
 
 if command -v yay &>/dev/null; then
-  pm="yay"
-elif command -v pacman &>/dev/null; then
+  pm="yay" 
+# test whether the calling user is root, otherwise prepend sudo
+elif [ "$EUID" -eq 0 ]; then
   pm="pacman"
 else
-  echo "Unsupported package manager"
+  pm="sudo pacman"
 fi
 
 alias inst="$pm -S --needed"
 alias asdeps='inst --asdeps'
 alias maj='inst -yu'
-alias majaur='yay -Sua'
+alias majaur="$pm -Sua"
 alias maj-dev='majaur --devel'
-alias remove='sudo pacman -Rs'
-alias purge='sudo pacman -Rsn'
-alias query="$pm -Ss"
+alias remove="$pm -Rs"
+alias purge="remove -n"
+# those two don't require sudo if called as a normal user so delete the substring 
+if [ $pm = "sudo pacman" ] ; then
+  alias query="${pm#sudo } -Ss"
+  alias repinfo="${pm#sudo } -Si"
+else
+  alias query="$pm -Ss"
+  alias repinfo="$pm -Si"
+fi
+alias cleancache="$pm -Sc"
+# alias rem_orphan='yay -Yc'
+
 alias search='pacman -Qs'
-alias repinfo="$pm -Si"
 alias pkginfo='pacman -Qi'
 alias whose='pacman -Qo'
 alias orphan='pacman -Qdtq'
-alias rem_orphan="pacman -Qtdq | sudo pacman -Rns -"
-# alias rem_orphan='yay -Yc'
-alias cleancache="$pm -Sc"
+alias rem_orphan="orphan | purge -"
 
-### systemd
+alias mksrcinfo='makepkg --printsrcinfo > .SRCINFO'
+
+## systemd
 
 alias sctl='sudo systemctl'
 alias uctl='systemctl --user'
@@ -65,6 +76,8 @@ alias reload='sctl reload'
 alias sreboot='sctl reboot'
 alias poweroff='sctl poweroff'
 alias jctl='journalctl -o short-iso'
+
+## apps
 
 ### git
 
@@ -84,13 +97,10 @@ alias gdif='git diff'
 
 # make sure any program still calling youtube-dl gets redirected
 alias youtube-dl='yt-dlp'
-
 # common options that I always want
 alias ytdl='yt-dlp --no-mtime --embed-metadata --no-embed-info-json --embed-thumbnail --concurrent-fragments 5 --merge-output-format "mkv" -o "%(uploader)s - %(upload_date)s - %(title)s.%(ext)s"'
-
 # parallel downloading
 alias ytdlx='ytdl --external-downloader aria2c --external-downloader-args "-j 8 -s 8 -x 8 -k 5M"'
-
 # download music
 alias ytdlm='ytdl -f "258/251/22/256/140/250/18/249/139" -o "%(title)s.%(ext)s"'
 # alter: --format "(bestaudio[acodec^=opus]/bestaudio)/best"
