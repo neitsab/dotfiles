@@ -44,7 +44,7 @@ alias maj='inst -yu'
 alias majaur="$pm -Sua"
 alias maj-dev='majaur --devel'
 alias remove="$pm -Rs"
-alias purge="remove -n"
+alias purge="$pm -Rsn"
 # those two don't require sudo if called as a normal user so delete the substring 
 if [ $pm = "sudo pacman" ] ; then
   alias query="${pm#sudo } -Ss"
