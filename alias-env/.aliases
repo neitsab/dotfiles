@@ -63,6 +63,7 @@ alias orphan='pacman -Qdtq'
 alias rem_orphan="orphan | purge -"
 
 alias mksrcinfo='makepkg --printsrcinfo > .SRCINFO'
+alias devtools-install="inst devtools --assume-installed breezy --assume-installed mercurial --assume-installed subversion"
 
 ## systemd
 
