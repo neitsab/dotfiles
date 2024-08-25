@@ -42,7 +42,6 @@ alias inst="$pm -S --needed"
 alias asdeps='inst --asdeps'
 alias maj='inst -yu'
 alias majaur="$pm -Sua"
-alias maj-dev='majaur --devel'
 alias remove="$pm -Rs"
 alias purge="$pm -Rsn"
 # those two don't require sudo if called as a normal user so delete the substring 
