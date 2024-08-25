@@ -15,7 +15,7 @@ alias cp='cp --reflink=auto'
 alias ipa='ip -c -br a'
 
 alias rsync-perfect='sudo rsync -aHAXShUU --info=progress2 --partial'
-alias oci-rsync='rsync -aHAXShUU --info=progress2 --partial --rsync-path="sudo rsync"'
+alias rsync-perfect-remote-sudo='rsync -aHAXShUU --info=progress2 --partial --rsync-path="sudo rsync"'
 
 alias ssh-forget='ssh -o UserKnownHostsFile=/dev/null'
 alias ssh-forget-pass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
