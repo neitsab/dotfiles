@@ -13,6 +13,7 @@ alias df='df -hT -x devtmpfs -x tmpfs'
 alias lsblk='lsblk -o NAME,TYPE,SIZE,LABEL,FSTYPE,MOUNTPOINT'
 alias cp='cp --reflink=auto'
 alias ipa='ip -c -br a'
+alias ipl='ip -c -br l'
 
 alias rsync-perfect='sudo rsync -aHAXShUU --info=progress2 --partial'
 alias rsync-perfect-remote-sudo='rsync -aHAXShUU --info=progress2 --partial --rsync-path="sudo rsync"'
