@@ -111,3 +111,13 @@ command_not_found_handler() {
 	fi
 	return 127
 }
+
+## Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
