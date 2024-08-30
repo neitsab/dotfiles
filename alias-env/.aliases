@@ -92,6 +92,8 @@ alias glog='git log --decorate --pretty=oneline --abbrev-commit'
 alias grog='glog --graph'
 alias gdif='git diff'
 
+command -v lazygit &>/dev/null && alias lg='lazygit'
+
 ### qemu/kvm
 
 #alias kvm='qemu-system-x86_64 -cpu host -enable-kvm -m 3G -vga vmware -full-screen'
