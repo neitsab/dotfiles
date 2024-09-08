@@ -62,6 +62,8 @@ alias whose='pacman -Qo'
 alias orphan='pacman -Qdtq'
 alias rem_orphan="orphan | purge -"
 alias modified="pacman -Qii | grep '\[modified]'"
+alias markasdeps="$pm -D --asdeps"
+alias markasexplicit="$pm -D --asexplicit"
 
 alias mksrcinfo='makepkg --printsrcinfo > .SRCINFO'
 alias devtools-install="inst devtools --assume-installed breezy --assume-installed mercurial --assume-installed subversion"
