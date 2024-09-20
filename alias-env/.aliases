@@ -132,3 +132,7 @@ alias ffmpeg='ffmpeg -hide_banner'
 ### phoronix-test-suite
 
 alias pts="phoronix-test-suite"
+
+### Terraform
+
+command -v terraform &>/dev/null && alias tf='terraform'
