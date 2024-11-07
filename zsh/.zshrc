@@ -119,3 +119,8 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+## atuin/dev
+if type atuin &>/dev/null; then
+  eval "$(atuin init zsh)"
+fi
