@@ -8,7 +8,7 @@ PS1='[\u@\h \W]\$ '
 [[ $- == *i* ]] && stty -ixon
 
 # pkgfile "command not found" hook
-source /usr/share/doc/pkgfile/command-not-found.bash
+if command -v pkgfile &>/dev/null; then source /usr/share/doc/pkgfile/command-not-found.bash; fi
 
 # Source shell-agnostic environment variables from common file;
 # fallback with the few defined ones
