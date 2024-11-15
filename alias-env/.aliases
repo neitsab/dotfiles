@@ -76,6 +76,8 @@ if command -v pacman &>/dev/null; then
   alias devtools-install="inst devtools --assume-installed breezy --assume-installed mercurial --assume-installed subversion"
 fi
 
+if command -v pacseek &>/dev/null; then  alias pck='pacseek'; fi
+
 ## systemd
 
 alias sctl='sudo systemctl'
