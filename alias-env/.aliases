@@ -2,7 +2,7 @@
 
 # Common aliases between Zsh and Bash
 
-## General CLI
+## Essential CLI
 
 alias sudo='sudo '
 alias ls='ls --color=auto'
@@ -15,17 +15,49 @@ alias cp='cp --reflink=auto'
 alias ipa='ip -c -br a'
 alias ipl='ip -c -br l'
 
-alias rsync-perfect='sudo rsync -aHAXShUU --info=progress2 --partial'
-alias rsync-perfect-remote-sudo='rsync -aHAXShUU --info=progress2 --partial --rsync-path="sudo rsync"'
+command -v micro &>/dev/null && alias nano='micro'
+alias edit="$EDITOR"
+
+## systemd
+
+alias sctl='sudo systemctl'
+alias uctl='systemctl --user'
+alias enable='sctl enable'
+alias disable='sctl disable'
+alias status='systemctl status'
+alias start='sctl start'
+alias stop='sctl stop'
+alias restart='sctl restart'
+alias reload='sctl reload'
+alias sreboot='sctl reboot'
+alias poweroff='sctl poweroff'
+alias jctl='journalctl -o short-iso'
+
+## Extended CLI
 
 alias ssh-forget='ssh -o UserKnownHostsFile=/dev/null'
 alias ssh-forget-pass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
 alias ssh-old='ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -o HostkeyAlgorithms=+ssh-rsa'
 
+alias rsync-perfect='sudo rsync -aHAXShUU --info=progress2 --partial'
+alias rsync-perfect-remote-sudo='rsync -aHAXShUU --info=progress2 --partial --rsync-path="sudo rsync"'
+
+### git
+
+if command -v git &>/dev/null; then
+  alias gss='git status'
+  alias gc='git commit'
+  alias gp="git push"
+  alias gpu="git pull"
+  alias glog='git log --decorate --pretty=oneline --abbrev-commit'
+  alias grog='glog --graph'
+  alias gdif='git diff'
+fi
+
+if command -v lazygit &>/dev/null; then alias lg='lazygit'; fi
+
 ### Core utils replacements
 
-command -v micro &>/dev/null && alias nano='micro'
-alias edit="$EDITOR"
 #command -v bat >/dev/null && alias cat='bat'
 
 ## Package management
@@ -78,36 +110,7 @@ fi
 
 if command -v pacseek &>/dev/null; then  alias pck='pacseek'; fi
 
-## systemd
-
-alias sctl='sudo systemctl'
-alias uctl='systemctl --user'
-alias enable='sctl enable'
-alias disable='sctl disable'
-alias status='systemctl status'
-alias start='sctl start'
-alias stop='sctl stop'
-alias restart='sctl restart'
-alias reload='sctl reload'
-alias sreboot='sctl reboot'
-alias poweroff='sctl poweroff'
-alias jctl='journalctl -o short-iso'
-
 ## Misc CLI tools
-
-### git
-
-if command -v git &>/dev/null; then
-  alias gss='git status'
-  alias gc='git commit'
-  alias gp="git push"
-  alias gpu="git pull"
-  alias glog='git log --decorate --pretty=oneline --abbrev-commit'
-  alias grog='glog --graph'
-  alias gdif='git diff'
-fi
-
-if command -v lazygit &>/dev/null; then alias lg='lazygit'; fi
 
 ### qemu/kvm
 
