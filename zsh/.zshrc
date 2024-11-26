@@ -70,7 +70,7 @@ bindkey "^Z" predict-off
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ## Source shell-agnostic aliases from common file (https://askubuntu.com/a/195357)
-source $HOME/.aliases
+if [ -e $HOME/.aliases ]; then source $HOME/.aliases; fi
 
 ## For env var --> see .zshenv
 
