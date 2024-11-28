@@ -70,8 +70,9 @@ if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; th
 fi
 
 ## syntax highlighting
-# https://wiki.archlinux.org/index.php/Zsh#Fish-like_syntax_highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 ## Source shell-agnostic aliases from common file (https://askubuntu.com/a/195357)
 if [ -e $HOME/.aliases ]; then source $HOME/.aliases; fi
@@ -94,7 +95,7 @@ function shrinkpdf-high { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4
 # }
 
 # command not found handler
-# https://wiki.archlinux.org/index.php/Zsh#The_%22command_not_found%22_handler
+# https://wiki.archlinux.org/title/Zsh#pacman_-F_%22command_not_found%22_handler
 function command_not_found_handler {
     local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
     printf 'zsh: command not found: %s\n' "$1"
@@ -130,7 +131,7 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-## atuin/dev
+## atuin
 if type atuin &>/dev/null; then
   eval "$(atuin init zsh --disable-up-arrow)"
 fi
