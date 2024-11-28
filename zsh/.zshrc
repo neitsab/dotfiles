@@ -58,12 +58,16 @@ unsetopt HIST_IGNORE_SPACE
 # and remove superfluous blanks from each command line being added to the history list
 setopt HIST_FIND_NO_DUPS HIST_REDUCE_BLANKS
 
-## Autocomplete: command prediction from history
-is4 && zrcautoload predict-on && \
-zle -N predict-on         && \
-zle -N predict-off        && \
-bindkey "^X^Z" predict-on && \
-bindkey "^Z" predict-off
+## Grml Autocomplete: command prediction from history
+## I didn't like it so comment it out and replace it with zsh-autosuggestions
+# is4 && zrcautoload predict-on && \
+# zle -N predict-on         && \
+# zle -N predict-off        && \
+# bindkey "^X^Z" predict-on && \
+# bindkey "^Z" predict-off
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 ## syntax highlighting
 # https://wiki.archlinux.org/index.php/Zsh#Fish-like_syntax_highlighting
