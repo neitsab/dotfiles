@@ -15,8 +15,10 @@ function command-exists {
 alias sudo='sudo '
 alias ls='ls --color=auto'
 alias ll='ls -lah --time-style=long-iso'
+alias l=ll
 alias L='less'
 alias grep='grep -i --color=auto'
+alias g=grep
 alias diff='diff -y --suppress-common-lines'
 alias df='df -hT -x devtmpfs -x tmpfs'
 alias lsblk='lsblk -o NAME,TYPE,SIZE,LABEL,FSTYPE,MOUNTPOINT'
@@ -28,6 +30,7 @@ alias ipl='ip -c -br l'
 
 command-exists micro && alias nano='micro'
 alias edit="$EDITOR"
+alias e=edit
 
 ## systemd
 
@@ -63,27 +66,28 @@ if command-exists git; then
   alias glog='git log --decorate --pretty=oneline --abbrev-commit'
   alias grog='glog --graph'
   alias gdif='git diff'
+  alias gdiff=gdif
 fi
 
 if command-exists lazygit; then alias lg='lazygit'; fi
 
 ### Core utils replacements
 
-#command-exists bat >/dev/null && alias cat='bat'
+#command-exists bat && alias cat='bat'
 
 ## Package management
 
 # Test whether we're on an Arch-based distro
 if command-exists pacman; then
   # if true, use a variable to store the AUR helper used
-  AURHELPER=yay
+  aurhelper=yay
   # test whether the calling user is root, if true then bypass the AUR helper because
   # it most likely means I'm on system where I won't install/use an AUR helper
   if [ "$EUID" -eq 0 ]; then
       pm="pacman"
   # otherwise, if the defined AUR helper is installed use that
-  elif command-exists "$AURHELPER"; then
-    pm="$AURHELPER"
+  elif command-exists "$aurhelper"; then
+    pm="$aurhelper"
   # if it is not and we are not root, just use sudo pacman
   else
     pm="sudo pacman"
