@@ -2,6 +2,14 @@
 
 # Common aliases between Zsh and Bash
 
+## helper
+
+# less fastidious than typing out the whole thing every time
+function command-exists {
+  command -v "$1" &> /dev/null
+  return $?
+}
+
 ## Essential CLI
 
 alias sudo='sudo '
@@ -16,7 +24,9 @@ alias cp='cp --reflink=auto'
 alias ipa='ip -c -br a'
 alias ipl='ip -c -br l'
 
-command -v micro &>/dev/null && alias nano='micro'
+### editor
+
+command-exists micro && alias nano='micro'
 alias edit="$EDITOR"
 
 ## systemd
@@ -45,7 +55,7 @@ alias rsync-perfect-remote-sudo='rsync -aHAXShUU --info=progress2 --partial --rs
 
 ### git
 
-if command -v git &>/dev/null; then
+if command-exists git; then
   alias gss='git status'
   alias gc='git commit'
   alias gp="git push"
@@ -55,16 +65,16 @@ if command -v git &>/dev/null; then
   alias gdif='git diff'
 fi
 
-if command -v lazygit &>/dev/null; then alias lg='lazygit'; fi
+if command-exists lazygit; then alias lg='lazygit'; fi
 
 ### Core utils replacements
 
-#command -v bat >/dev/null && alias cat='bat'
+#command-exists bat >/dev/null && alias cat='bat'
 
 ## Package management
 
 # Test whether we're on an Arch-based distro
-if command -v pacman &>/dev/null; then
+if command-exists pacman; then
   # if true, use a variable to store the AUR helper used
   AURHELPER=yay
   # test whether the calling user is root, if true then bypass the AUR helper because
@@ -72,7 +82,7 @@ if command -v pacman &>/dev/null; then
   if [ "$EUID" -eq 0 ]; then
       pm="pacman"
   # otherwise, if the defined AUR helper is installed use that
-  elif command -v "$AURHELPER" &>/dev/null; then
+  elif command-exists "$AURHELPER"; then
     pm="$AURHELPER"
   # if it is not and we are not root, just use sudo pacman
   else
@@ -109,7 +119,7 @@ if command -v pacman &>/dev/null; then
   alias devtools-install="inst devtools --assume-installed breezy --assume-installed mercurial --assume-installed subversion"
 fi
 
-if command -v pacseek &>/dev/null; then  alias pck='pacseek'; fi
+if command-exists pacseek; then  alias pck='pacseek'; fi
 
 ## Misc CLI tools
 
@@ -120,7 +130,7 @@ if command -v pacseek &>/dev/null; then  alias pck='pacseek'; fi
 ### youtube-dl
 
 # make sure any program still calling youtube-dl gets redirected
-if command -v yt-dlp &>/dev/null; then
+if command-exists yt-dlp; then
   alias youtube-dl='yt-dlp'
   # common options that I always want
   alias ytdl='yt-dlp --no-mtime --embed-metadata --no-embed-info-json --embed-thumbnail --concurrent-fragments 5 --merge-output-format "mkv" -o "%(uploader)s - %(upload_date)s - %(title)s.%(ext)s"'
@@ -145,12 +155,12 @@ fi
 
 ### ffmpeg
 
-if command -v ffmpeg &>/dev/null; then alias ffmpeg='ffmpeg -hide_banner'; fi
+if command-exists ffmpeg; then alias ffmpeg='ffmpeg -hide_banner'; fi
 
 ### phoronix-test-suite
 
-if command -v phoronix-test-suite &>/dev/null; then alias pts="phoronix-test-suite"; fi
+if command-exists phoronix-test-suite; then alias pts="phoronix-test-suite"; fi
 
 ### Terraform
 
-if command -v terraform &>/dev/null; then  alias tf='terraform'; fi
+if command-exists terraform; then  alias tf='terraform'; fi
