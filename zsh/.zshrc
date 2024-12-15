@@ -124,9 +124,8 @@ function command_not_found_handler {
 }
 
 ## Homebrew
-if type brew &>/dev/null; then
+if [ -e /home/linuxbrew/.linuxbrew/bin/brew ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
   autoload -Uz compinit
   compinit
 fi
