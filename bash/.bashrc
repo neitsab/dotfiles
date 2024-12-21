@@ -27,6 +27,3 @@ if [ -f ~/.aliases ]; then
 fi
 
 ## Bash-only aliases & functions ##
-
-function compress() { tar -I zstd -cf "$1.tar.zst" "$1" ; }
-function ytm() { mpv --no-video --ytdl-format=bestaudio ytdl://ytsearch:"$@" ; }
