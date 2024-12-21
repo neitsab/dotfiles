@@ -7,7 +7,6 @@
 # less fastidious than typing out the whole thing every time
 function command-exists {
   command -v "$1" &> /dev/null
-  return $?
 }
 
 ## Essential CLI
@@ -25,10 +24,11 @@ alias lsblk='lsblk -o NAME,TYPE,SIZE,LABEL,FSTYPE,MOUNTPOINT'
 alias cp='cp --reflink=auto'
 alias ipa='ip -c -br a'
 alias ipl='ip -c -br l'
+alias ipr='ip -c -br r'
 
 ### editor
 
-command-exists micro && alias nano='micro'
+if command-exists micro; then alias nano='micro'; fi
 alias edit="$EDITOR"
 alias e=edit
 
