@@ -7,7 +7,7 @@
 # less fastidious than typing out the whole thing every time
 function command-exists {
   command -v "$1" &> /dev/null
-  return $?
+  # return $?
 }
 
 ## Essential CLI
@@ -28,7 +28,7 @@ alias ipl='ip -c -br l'
 
 ### editor
 
-command-exists micro && alias nano='micro'
+command-exists micro && alias nano='micro' || return 0
 alias edit="$EDITOR"
 alias e=edit
 
@@ -69,7 +69,7 @@ if command-exists git; then
   alias gdiff=gdif
 fi
 
-if command-exists lazygit; then alias lg='lazygit'; fi
+command-exists lazygit && alias lg='lazygit' || return 0
 
 ### Core utils replacements
 
@@ -123,7 +123,7 @@ if command-exists pacman; then
   alias devtools-install="inst devtools --assume-installed breezy --assume-installed mercurial --assume-installed subversion"
 fi
 
-if command-exists pacseek; then  alias pck='pacseek'; fi
+command-exists pacseek && alias pck='pacseek' || return 0
 
 ## Misc CLI tools
 
@@ -159,12 +159,12 @@ fi
 
 ### ffmpeg
 
-if command-exists ffmpeg; then alias ffmpeg='ffmpeg -hide_banner'; fi
+command-exists ffmpeg && alias ffmpeg='ffmpeg -hide_banner' || return 0
 
 ### phoronix-test-suite
 
-if command-exists phoronix-test-suite; then alias pts="phoronix-test-suite"; fi
+command-exists phoronix-test-suite && alias pts="phoronix-test-suite" || return 0
 
 ### Terraform
 
-if command-exists terraform; then  alias tf='terraform'; fi
+command-exists terraform && alias tf='terraform' || return 0
