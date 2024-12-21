@@ -50,7 +50,7 @@ alias jctl='journalctl -o short-iso'
 ## Extended CLI
 
 alias ssh-forget='ssh -o UserKnownHostsFile=/dev/null'
-alias ssh-forget-pass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
+alias ssh-password='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
 alias ssh-old='ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -o HostkeyAlgorithms=+ssh-rsa'
 
 alias rsync-perfect='sudo rsync -aHAXShUU --info=progress2 --partial'
