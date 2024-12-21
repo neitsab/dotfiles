@@ -168,3 +168,9 @@ if command-exists phoronix-test-suite; then alias pts="phoronix-test-suite"; fi
 ### Terraform
 
 if command-exists terraform; then  alias tf='terraform'; fi
+
+### Enable a different prompt in Distrobox containers
+if [ -f /run/.toolboxenv ]; then
+    [ "${BASH_VERSION:-}" != "" ] && PS1="📦[\u@$CONTAINER_ID \W]$ "
+    [ "${ZSH_VERSION:-}" != "" ] && prompt off; PS1="📦[%n@$CONTAINER_ID]%~%# "
+fi
