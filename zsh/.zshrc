@@ -134,3 +134,8 @@ fi
 if type atuin &>/dev/null; then
   eval "$(atuin init zsh --disable-up-arrow)"
 fi
+
+## fzf: set up key bindings and fuzzy completion
+if command -v fzf &>/dev/null; then
+  source <(fzf --zsh)
+fi
