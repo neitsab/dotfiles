@@ -14,7 +14,7 @@ function command-exists {
 alias sudo='sudo '
 alias ls='ls --color=auto'
 alias ll='ls -lah --time-style=long-iso'
-alias l=ll
+alias l='ls -1'
 alias L='less'
 alias grep='grep -i --color=auto'
 alias g=grep
@@ -79,16 +79,17 @@ if command-exists lazygit; then alias lg='lazygit'; fi
 
 # Test whether we're on an Arch-based distro
 if command-exists pacman; then
-  # if true, use a variable to store the AUR helper used
-  aurhelper=yay
   # test whether the calling user is root, if true then bypass the AUR helper because
-  # it most likely means I'm on system where I won't install/use an AUR helper
+  # we shouldn't/cannot use an AUR helper as root
   if [ "$EUID" -eq 0 ]; then
-      pm="pacman"
-  # otherwise, if the defined AUR helper is installed use that
-  elif command-exists "$aurhelper"; then
-    pm="$aurhelper"
-  # if it is not and we are not root, just use sudo pacman
+    pm="pacman"
+  # otherwise, test for AUR helper and use that if installed
+  elif command-exists yay; then
+    pm="yay"
+  # add this one for distrobox
+  elif command-exists paru; then
+    pm="paru"
+  # if there are none and we are not root, just use sudo pacman
   else
     pm="sudo pacman"
   fi
