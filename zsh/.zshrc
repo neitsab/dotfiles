@@ -43,9 +43,6 @@ zle -N slash-backward-kill-word
 
 # increase saved history *in the hist file* (session hist remains at 5000 for memory efficiency)
 export SAVEHIST=1000000
-# try to use something different than Unix epoch in hist file
-# (not sure this applies to zsh: https://unix.stackexchange.com/a/103407)
-export HISTTIMEFORMAT="[%F %T] "
 
 # grml-zsh-config already sets share_history and extended_history; 
 # DO NOT SET INC_APPEND_HISTORY WHEN USING SHARE_HISTORY!! https://unix.stackexchange.com/a/651538
