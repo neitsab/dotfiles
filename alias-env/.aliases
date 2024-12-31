@@ -113,6 +113,7 @@ if command-exists pacman; then
 
   alias search='pacman -Qs'
   alias pkginfo='pacman -Qi'
+  alias pql='pacman -Ql'
   alias whose='pacman -Qo'
   alias orphan='pacman -Qdtq'
   alias rem_orphan="orphan | purge -"
