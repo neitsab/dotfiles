@@ -135,4 +135,7 @@ fi
 ## fzf: set up key bindings and fuzzy completion
 if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
+  if command -v atuin &>/dev/null; then
+    bindkey -M emacs '^R' atuin-search
+  fi
 fi
