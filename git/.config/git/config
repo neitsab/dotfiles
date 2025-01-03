@@ -1,6 +1,8 @@
 [user]
-	email = neitsab@esrevart.net
 	name = Bastien Traverse
+	email = neitsab@esrevart.net
+[includeIf "hasconfig:remote.*.url:ssh://aur@aur.archlinux.org/**"]
+  path = ~/.config/git/arch-config
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
 [core]
