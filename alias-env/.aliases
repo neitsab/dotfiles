@@ -2,6 +2,10 @@
 
 # Common aliases between Zsh and Bash
 
+## Disable flow control to get forward search working with Ctrl-S, with the added benefit
+# of not freezing the terminal by mistakenly pressing Ctrl-S
+stty -ixon
+
 ## helper
 
 # less fastidious than typing out the whole thing every time
