@@ -1,17 +1,21 @@
 #!/hint/bash
 
-# Common aliases between Zsh and Bash
+# Common settings & aliases between Zsh and Bash
 
 ## Disable flow control to get forward search working with Ctrl-S, with the added benefit
 # of not freezing the terminal by mistakenly pressing Ctrl-S
 stty -ixon
 
-## helper
-
-# less fastidious than typing out the whole thing every time
+## less fastidious than typing out the whole thing every time
 function command-exists {
   command -v "$1" &> /dev/null
 }
+
+## Enable a different prompt in Distrobox containers
+if [ -f /run/.toolboxenv ]; then
+    [ "${BASH_VERSION:-}" != "" ] && PS1="📦[\u@$CONTAINER_ID \W]$ "
+    [ "${ZSH_VERSION:-}" != "" ] && prompt off; PS1="📦[%n@$CONTAINER_ID]%~%# "
+fi
 
 ## Essential CLI
 
@@ -35,6 +39,10 @@ alias ipr='ip -c -br r'
 if command-exists micro; then alias nano='micro'; fi
 alias edit="$EDITOR"
 alias e=edit
+
+### Core utils replacements
+
+#command-exists bat && alias cat='bat'
 
 ## systemd
 
@@ -75,10 +83,6 @@ fi
 
 if command-exists lazygit; then alias lg='lazygit'; fi
 
-### Core utils replacements
-
-#command-exists bat && alias cat='bat'
-
 ## Package management
 
 # Test whether we're on an Arch-based distro
@@ -112,8 +116,8 @@ if command-exists pacman; then
   alias cleancache="$pm -Sc"
   # alias rem_orphan='yay -Yc'
 
-  # The following aliases don't gain any extra features from an AUR helper so usthey're
-  # run with pacman
+  # The following aliases don't gain any extra features from an AUR helper so they're
+  # run directly with pacman
   alias search='pacman -Qs'
   alias pkginfo='pacman -Qi'
   alias pql='pacman -Ql'
@@ -134,8 +138,9 @@ if command-exists pacman; then
 elif command-exists apt && ! command-exists pacman; then
   if [ "$EUID" -eq 0 ]; then
     pm="apt"
-  else pm="sudo apt"
-
+  else
+    pm="sudo apt"
+  fi
   alias inst="$pm install"
   alias asdep="inst --mark-auto"
   alias maj="$pm update && $pm full-upgrade"
@@ -147,7 +152,6 @@ elif command-exists apt && ! command-exists pacman; then
   alias pql="dpkg -l"
   alias whose="dpkg -S"
   alias clean="$pm autoclean"
-  fi
 fi
 
 ## Misc CLI tools
@@ -193,9 +197,3 @@ if command-exists phoronix-test-suite; then alias pts="phoronix-test-suite"; fi
 ### Terraform
 
 if command-exists terraform; then  alias tf='terraform'; fi
-
-### Enable a different prompt in Distrobox containers
-if [ -f /run/.toolboxenv ]; then
-    [ "${BASH_VERSION:-}" != "" ] && PS1="📦[\u@$CONTAINER_ID \W]$ "
-    [ "${ZSH_VERSION:-}" != "" ] && prompt off; PS1="📦[%n@$CONTAINER_ID]%~%# "
-fi
