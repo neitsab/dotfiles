@@ -1,0 +1,58 @@
+#!/hint/bash
+
+# Shared shell settings
+
+config_dir="$HOME/.config/shell-config"
+
+# Disable flow control to get forward search working with Ctrl-S, with the added benefit
+# of not freezing the terminal by mistakenly pressing Ctrl-S
+stty -ixon
+
+# less fastidious than typing out the whole thing every time
+function command-exists {
+  command -v "$1" &> /dev/null
+}
+
+# Enable a different prompt in Distrobox containers
+if [ -f /run/.toolboxenv ]; then
+    [ "${BASH_VERSION:-}" != "" ] && PS1="📦[\u@$CONTAINER_ID \W]$ "
+    [ "${ZSH_VERSION:-}" != "" ] && prompt off; PS1="📦[%n@$CONTAINER_ID]%~%# "
+fi
+
+## env setting
+
+if [ -r "${config_dir}"/env ]
+    then source "${config_dir}"/env
+fi
+
+## alias sourcing
+if [ -d "${config_dir}"/aliases.d/ ]; then
+    # source core aliases common to all the distros I use
+    if [ -r "${config_dir}"/aliases.d/general ]; then
+        source "${config_dir}"/aliases.d/general
+    fi
+
+    # package management aliases
+    # for pacman-based distro
+    if command-exists pacman; then
+        source "${config_dir}"/aliases.d/pacman
+    fi
+    # for apt-based ones
+    # take into account the case where apt is installed on Arch but not the PM
+    if command-exists apt && ! grep -q "Arch Linux" /etc/os-release ; then
+        source "${config_dir}"/aliases.d/apt
+    fi
+
+    # source misc aliases, mostly used on main laptop/machine
+    if [ -r "${config_dir}"/aliases.d/misc ]; then
+        source "${config_dir}"/aliases.d/misc
+    fi
+  # alternatively, source all files indiscriminately (only if they contain their own logic
+  # for i in "${config_dir}"/aliases.d/*; do
+  #   if [ -r $i ]; then
+  #     source $i
+  #   fi
+  # done
+  # unset i
+fi
+

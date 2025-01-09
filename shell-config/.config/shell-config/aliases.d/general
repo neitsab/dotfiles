@@ -1,0 +1,86 @@
+#!/hint/bash
+
+## Aliases related to general CLI work
+
+# alias completion with sudo (see https://askubuntu.com/a/22043)
+if command-exists sudo; then alias sudo='sudo '; fi
+
+alias ls='ls --color=auto'
+alias ll='ls -lah --time-style=long-iso -v'
+alias l='ls -1A'
+alias L='less'
+alias grep='grep -i --color=auto'
+alias g=grep
+alias diff='diff -y --suppress-common-lines'
+alias df='df -hT -x devtmpfs -x tmpfs'
+alias lsblk='lsblk -o NAME,TYPE,SIZE,LABEL,FSTYPE,MOUNTPOINT'
+alias cp='cp --reflink=auto'
+alias ipa='ip -c -br a'
+alias ipl='ip -c -br l'
+alias ipr='ip -c -br r'
+
+## editor
+
+if command-exists micro; then alias m='micro'; fi
+alias edit="$EDITOR"
+alias e=edit
+
+### Core utils replacements
+
+#command-exists bat && alias cat='bat'
+
+## systemd
+
+# prefix systemctl alias with sudo depending on whether we are root
+if [ "$EUID" -eq 0 ]; then
+  alias sctl='systemctl'
+  else
+  alias sctl='sudo systemctl'
+fi
+alias uctl='systemctl --user'
+alias enable='sctl enable'
+alias disable='sctl disable'
+alias start='sctl start'
+alias stop='sctl stop'
+alias restart='sctl restart'
+alias reload='sctl reload'
+alias status='systemctl status'
+alias jctl='journalctl -o short-iso'
+alias sjctl='sudo jctl'
+alias sreboot='sctl reboot'
+alias poweroff='sctl poweroff'
+
+## SSH
+
+if command-exists ssh; then
+  alias ssh-forget='ssh -o UserKnownHostsFile=/dev/null'
+  alias ssh-password='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
+  alias ssh-old='ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -o HostkeyAlgorithms=+ssh-rsa'
+fi
+
+## rsync
+
+if command-exists rsync; then
+  if [ "$EUID" -eq 0 ]; then
+    rsync_command="rsync"
+  else
+    rsync_command="sudo rsync"
+  fi
+  alias rsync-perfect="$rsync_command -aHAXShUU --info=progress2 --partial"
+  alias rsync-perfect-remote-sudo="rsync-perfect --rsync-path='sudo rsync'"
+fi
+
+## git
+
+if command-exists git; then
+  alias gss='git status'
+  alias gc='git commit'
+  alias gp='git push'
+  alias gpu="git pull"
+  alias glog='git log --decorate --pretty=oneline --abbrev-commit'
+  alias grog='glog --graph'
+  alias gdif='git diff'
+  # alias gdiff=gdif
+fi
+if command-exists lazygit; then alias lg='lazygit'; fi
+

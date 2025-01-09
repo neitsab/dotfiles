@@ -1,0 +1,19 @@
+#!/hint/bash
+
+if [ "$EUID" -eq 0 ]; then
+  pm="apt"
+else
+  pm="sudo apt"
+fi
+
+alias inst="$pm install"
+alias asdep="inst --mark-auto"
+alias maj="$pm update && $pm full-upgrade"
+alias remove="$pm remove --autoremove"
+alias purge="remove --purge"
+alias query="${pm#sudo } search"
+alias search="${pm#sudo } list -a --installed"
+alias pkginfo="${pm#sudo } show"
+alias pql="dpkg -l"
+alias whose="dpkg -S"
+alias clean="$pm autoclean"
