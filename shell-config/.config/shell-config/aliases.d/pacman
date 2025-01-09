@@ -1,0 +1,50 @@
+#!/hint/bash
+
+# pacman/AUR-related aliases
+
+# test whether the calling user is root; if so then bypass the AUR helper because we
+# shouldn't/cannot use one as root
+if [ "$EUID" -eq 0 ]; then
+  pm="pacman"
+# otherwise, test for an AUR helper and use it if present
+elif command-exists yay; then
+  pm="yay"
+# for distrobox
+elif command-exists paru; then
+  pm="paru"
+# if there are none and we are not root, just use sudo pacman
+else
+  pm="sudo pacman"
+fi
+
+alias inst="$pm -S --needed"
+alias asdeps='inst --asdeps'
+alias maj='inst -yu'
+alias majaur="$pm -Sua"
+alias remove="$pm -Rs"
+alias purge="$pm -Rsn"
+# remove sudo the eventual sudo since he following aliases don't need it. Doesn't affect
+# other pm values
+alias query="${pm#sudo } -Ss"
+alias repinfo="${pm#sudo } -Si"
+
+alias cleancache="$pm -Sc"
+# alias rem_orphan='$pm -Yc'
+
+# The following aliases don't gain any extra features from an AUR helper so they're run
+# directly with pacman
+alias search='pacman -Qs'
+alias pkginfo='pacman -Qi'
+alias pql='pacman -Ql'
+alias whose='pacman -Qo'
+alias orphan='pacman -Qdtq'
+alias rem_orphan="orphan | purge -"
+alias modified="pacman -Qii | grep '\[modified]'"
+alias markasdeps="pacman -D --asdeps"
+alias markasexplicit="pacman -D --asexplicit"
+
+# AUR/package building
+alias mksrcinfo='makepkg --printsrcinfo > .SRCINFO'
+alias devtools-install="inst devtools --assume-installed breezy --assume-installed mercurial --assume-installed subversion"
+
+if command-exists pacseek; then  alias pck='pacseek'; fi

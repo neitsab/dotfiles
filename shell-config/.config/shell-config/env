@@ -1,13 +1,11 @@
 #!/hint/bash
 
 ## PATH setting
-if [[ -d $HOME/PC/bin ]]; then
-  export PATH="$HOME/PC/bin:$PATH"
-fi
-
-if [[ -d $HOME/.local/bin ]]; then
-  export PATH="$HOME/.local/bin:$PATH"
-fi
+for member in PC/bin .local/bin; do
+  if [[ -d $HOME/$member ]]; then
+    export PATH="$HOME/$member:$PATH"
+  fi
+done
 
 # editor settings
 if command -v micro &>/dev/null; then
@@ -37,9 +35,9 @@ elif [ -f "/usr/share/source-highlight/src-hilite-lesspipe.sh" ]; then
 fi
 
 ## Misc
-export GOPATH=~/.go
-#export AURDEST=
-#export KEYBASE_SYSTEMD=1
+
+# put Go directory out of my sight (https://rakyll.org/default-gopath/)
+export GOPATH=~/.local/share/go
 
 # fzf
 if command -v fzf &>/dev/null; then
