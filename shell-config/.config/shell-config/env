@@ -41,5 +41,5 @@ export GOPATH=~/.local/share/go
 
 # fzf
 if command -v fzf &>/dev/null; then
-  export FZF_DEFAULT_COMMAND='find .'
+  export FZF_DEFAULT_COMMAND='fd -u'
 fi
