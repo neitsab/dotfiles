@@ -19,6 +19,8 @@ alias ipa='ip -c -br a'
 alias ipl='ip -c -br l'
 alias ipr='ip -c -br r'
 
+if command-exists tree; then alias tree='tree -a -I .git'; fi
+
 ## editor
 
 if command-exists micro; then alias m='micro'; fi
@@ -49,6 +51,14 @@ alias jctl='journalctl -o short-iso'
 alias sjctl='sudo jctl'
 alias sreboot='sctl reboot'
 alias poweroff='sctl poweroff'
+
+if command-exists systemd-nspawn; then
+    if [ "$EUID" -eq 0 ]; then
+        alias spawn="systemd-nspawn"
+    else
+        alias spawn="sudo systemd-nspawn"
+    fi
+fi
 
 ## SSH
 
