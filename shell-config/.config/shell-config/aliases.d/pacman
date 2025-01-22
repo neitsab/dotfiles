@@ -23,16 +23,16 @@ alias maj='inst -yu'
 alias majaur="$pm -Sua"
 alias remove="$pm -Rs"
 alias purge="$pm -Rsn"
+alias markasdeps="$pm -D --asdeps"
+alias markasexplicit="$pm -D --asexplicit"
+alias cleancache="$pm -Sc"
+# alias rem_orphan='$pm -Yc'
 # remove sudo the eventual sudo since he following aliases don't need it. Doesn't affect
 # other pm values
 alias query="${pm#sudo } -Ss"
 alias repinfo="${pm#sudo } -Si"
-
-alias cleancache="$pm -Sc"
-# alias rem_orphan='$pm -Yc'
-
-# The following aliases don't gain any extra features from an AUR helper so they're run
-# directly with pacman
+# The following aliases don't gain any extra features from an AUR helper and don't need
+# elevated privileges so they're run directly with pacman
 alias search='pacman -Qs'
 alias pkginfo='pacman -Qi'
 alias pql='pacman -Ql'
@@ -40,8 +40,6 @@ alias whose='pacman -Qo'
 alias orphan='pacman -Qdtq'
 alias rem_orphan="orphan | purge -"
 alias modified="pacman -Qii | grep '\[modified]'"
-alias markasdeps="pacman -D --asdeps"
-alias markasexplicit="pacman -D --asexplicit"
 
 # AUR/package building
 alias mksrcinfo='makepkg --printsrcinfo > .SRCINFO'
