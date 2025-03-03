@@ -1,9 +1,9 @@
 #!/hint/bash
 
 ## PATH setting
-for member in PC/bin .local/bin; do
-  if [[ -d $HOME/$member ]]; then
-    export PATH="$HOME/$member:$PATH"
+for dir in PC/bin .local/bin; do
+  if [[ -d $HOME/$dir ]]; then
+    export PATH="$HOME/$dir:$PATH"
   fi
 done
 
@@ -43,3 +43,6 @@ export GOPATH=~/.local/share/go
 if command -v fzf &>/dev/null; then
   export FZF_DEFAULT_COMMAND='fd -u'
 fi
+
+# https://wiki.archlinux.org/title/Debuginfod
+unset DEBUGINFOD_URLS
