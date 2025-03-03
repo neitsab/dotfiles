@@ -32,6 +32,10 @@ if command-exists yt-dlp; then
   alias ytdl-archive-all='ytdl-archive --write-sub --sub-format "srt/ass/best" --sub-lang en,fr --embed-subs --write-description --write-info-json --write-annotations --write-thumbnail'
 fi
 
+## Use gdu instead of ncdu
+
+if command-exists gdu; then alias ncdu=gdu; fi
+
 ## phoronix-test-suite
 
 if command-exists phoronix-test-suite; then alias pts="phoronix-test-suite"; fi
