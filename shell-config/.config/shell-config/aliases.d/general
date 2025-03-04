@@ -63,8 +63,8 @@ fi
 ## SSH
 
 if command-exists ssh; then
-  alias ssh-forget='ssh -o UserKnownHostsFile=/dev/null'
-  alias ssh-password='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no -o UserKnownHostsFile=/dev/null'
+  alias ssh-forget='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+  alias ssh-password='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
   alias ssh-old='ssh -o PubkeyAcceptedAlgorithms=+ssh-rsa -o HostkeyAlgorithms=+ssh-rsa'
 fi
 
