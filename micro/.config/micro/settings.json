@@ -4,6 +4,7 @@
     },
     "autoclose": false,
     "mkparents": true,
+    "ruler": false,
     "softwrap": true,
     "tabstospaces": true,
     "wordwrap": true
