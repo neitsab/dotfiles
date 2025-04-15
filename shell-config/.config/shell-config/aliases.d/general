@@ -24,8 +24,7 @@ if command-exists tree; then alias tree='tree -a -I .git'; fi
 ## editor
 
 if command-exists micro; then alias m='micro'; fi
-alias edit="$EDITOR"
-alias e=edit
+alias e="$EDITOR"
 
 ### Core utils replacements
 
@@ -39,24 +38,18 @@ if [ "$EUID" -eq 0 ]; then
   else
   alias sctl='sudo systemctl'
 fi
-alias uctl='systemctl --user'
-alias enable='sctl enable'
-alias disable='sctl disable'
-alias start='sctl start'
-alias stop='sctl stop'
-alias restart='sctl restart'
-alias reload='sctl reload'
-alias status='systemctl status'
+# remap most common systemctl commands to not need to prefix them with sctl
+for i in enable disable start stop restart reload status reboot poweroff
+    do alias $i="sctl $i"
+done
 alias jctl='journalctl -o short-iso'
-alias sjctl='sudo jctl'
-alias sreboot='sctl reboot'
-alias poweroff='sctl poweroff'
+alias uctl='systemctl --user'
 
 if command-exists systemd-nspawn; then
     if [ "$EUID" -eq 0 ]; then
-        alias spawn="systemd-nspawn"
+        alias nspawn="systemd-nspawn"
     else
-        alias spawn="sudo systemd-nspawn"
+        alias nspawn="sudo systemd-nspawn"
     fi
 fi
 
@@ -72,11 +65,10 @@ fi
 
 if command-exists rsync; then
   if [ "$EUID" -eq 0 ]; then
-    rsync_command="rsync"
+    alias rsync-perfect="rsync -aHAXShUU --info=progress2 --partial"
   else
-    rsync_command="sudo rsync"
+    alias rsync-perfect="sudo rsync -aHAXShUU --info=progress2 --partial"
   fi
-  alias rsync-perfect="$rsync_command -aHAXShUU --info=progress2 --partial"
   alias rsync-perfect-remote-sudo="rsync-perfect --rsync-path='sudo rsync'"
 fi
 

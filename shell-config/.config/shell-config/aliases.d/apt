@@ -6,14 +6,16 @@ else
   pm="sudo apt"
 fi
 
+# privileged operations
 alias inst="$pm install"
 alias asdep="inst --mark-auto"
 alias maj="$pm update && $pm full-upgrade"
-alias remove="$pm remove --autoremove"
-alias purge="remove --purge"
-alias query="${pm#sudo } search"
-alias search="${pm#sudo } list -a --installed"
-alias pkginfo="${pm#sudo } show"
+alias remove="$pm autoremove"
+alias purge="$pm autopurge"
+alias clean="$pm autoclean"
+# non-privileged operations
+alias query="apt search"
+alias search="apt list -a --installed"
+alias pkginfo="apt show"
 alias pql="dpkg -l"
 alias whose="dpkg -S"
-alias clean="$pm autoclean"
