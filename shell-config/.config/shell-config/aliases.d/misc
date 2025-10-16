@@ -42,5 +42,13 @@ if command-exists phoronix-test-suite; then alias pts="phoronix-test-suite"; fi
 
 ## Terraform
 
-if command-exists terraform; then  alias tf='terraform'; fi
+if command-exists terraform; then alias tf='terraform'; fi
 
+## Docker
+
+if command-exists docker; then
+    alias d='docker'
+    alias dps='docker ps'
+    alias dpsa='docker ps -a'
+    alias dc='docker compose'
+fi
