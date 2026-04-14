@@ -47,3 +47,6 @@ if command-exists docker; then
     alias dpsa='docker ps -a'
     alias dc='docker compose'
 fi
+
+## Incus
+if command-exists incus; then alias i='incus'; fi
