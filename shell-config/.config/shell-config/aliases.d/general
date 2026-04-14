@@ -20,6 +20,7 @@ alias ipl='ip -c -br l'
 alias ipr='ip -c -br r'
 
 if command-exists tree; then alias tree='tree -a -I .git'; fi
+if command-exists bat; then alias cat=bat; fi
 
 ## editor
 
