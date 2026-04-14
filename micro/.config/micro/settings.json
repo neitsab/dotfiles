@@ -4,8 +4,10 @@
     },
     "autoclose": false,
     "mkparents": true,
+    "parsecursor": true,
     "ruler": false,
     "softwrap": true,
+    "tabsize": 2,
     "tabstospaces": true,
     "wordwrap": true
 }
