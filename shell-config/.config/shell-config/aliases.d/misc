@@ -1,7 +1,6 @@
 #!/hint/bash
 
 ## ffmpeg
-
 if command-exists ffmpeg; then alias ffmpeg='ffmpeg -hide_banner'; fi
 
 ## youtube-dl
@@ -33,19 +32,15 @@ if command-exists yt-dlp; then
 fi
 
 ## Use gdu instead of ncdu
-
 if command-exists gdu; then alias ncdu=gdu; fi
 
 ## phoronix-test-suite
-
 if command-exists phoronix-test-suite; then alias pts="phoronix-test-suite"; fi
 
 ## Terraform
-
 if command-exists terraform; then alias tf='terraform'; fi
 
 ## Docker
-
 if command-exists docker; then
     alias d='docker'
     alias dps='docker ps'
