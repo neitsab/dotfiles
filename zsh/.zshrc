@@ -112,9 +112,9 @@ fi
 
 ## Zsh-only functions
 
-function shrinkpdf-low { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=shrunk-"$1" "$1" }
-function shrinkpdf-mid { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=shrunk-"$1" "$1" }
-function shrinkpdf-high { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=shrunk-"$1" "$1" }
+function shrinkpdf-low { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$1"-shrunk "$1" }
+function shrinkpdf-mid { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$1"-shrunk "$1" }
+function shrinkpdf-high { /usr/bin/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$1"-shrunk "$1" }
 
 ## Homebrew
 if [ -e /home/linuxbrew/.linuxbrew/bin/brew ]; then
