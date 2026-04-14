@@ -46,3 +46,6 @@ fi
 
 # https://wiki.archlinux.org/title/Debuginfod
 unset DEBUGINFOD_URLS
+
+# Vulkan
+export ANV_DEBUG=video-decode,video-encode
