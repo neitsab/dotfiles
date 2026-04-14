@@ -39,4 +39,3 @@ convert:
         flac: ffmpeg -i $source -y -vn -acodec flac -aq 8 $dest
         ogg: ffmpeg -i $source -y -vn -acodec libvorbis -aq 5 $dest
         mp3: ffmpeg -i $source -y -vn -acodec libmp3lame -aq 2 -id3v2_version 3 $dest
-

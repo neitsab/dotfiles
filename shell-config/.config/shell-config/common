@@ -55,4 +55,3 @@ if [ -d "${config_dir}"/aliases.d/ ]; then
   # done
   # unset i
 fi
-

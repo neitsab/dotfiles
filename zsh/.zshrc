@@ -46,7 +46,7 @@ setopt GLOB_DOTS GLOB_COMPLETE CORRECT_ALL
 # increase saved history *in the hist file* (session hist remains at 5000 for memory efficiency)
 export SAVEHIST=1000000
 
-# grml-zsh-config already sets share_history and extended_history; 
+# grml-zsh-config already sets share_history and extended_history;
 # DO NOT SET INC_APPEND_HISTORY WHEN USING SHARE_HISTORY!! https://unix.stackexchange.com/a/651538
 
 # do not ignore commands starting with a space: more often than not it is just a typo
