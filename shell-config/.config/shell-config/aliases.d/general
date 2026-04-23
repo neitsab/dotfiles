@@ -19,8 +19,10 @@ alias ipa='ip -c -br a'
 alias ipl='ip -c -br l'
 alias ipr='ip -c -br r'
 
+# package-dependent
 if command-exists tree; then alias tree='tree -a -I .git'; fi
 if command-exists bat; then alias cat=bat; fi
+if command-exists fd; then alias fd='fd --unrestricted'; fi
 
 ## editor
 
