@@ -49,3 +49,6 @@ unset DEBUGINFOD_URLS
 
 # Vulkan
 export ANV_DEBUG=video-decode,video-encode
+
+# Claude Desktop
+export CLAUDE_USE_WAYLAND=1
