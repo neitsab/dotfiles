@@ -49,4 +49,7 @@ if command-exists docker; then
 fi
 
 ## Incus
-if command-exists incus; then alias i='incus'; fi
+if command-exists incus; then
+  alias i='incus'
+  alias ils='i ls'
+fi
