@@ -41,7 +41,11 @@ export GOPATH=~/.local/share/go
 
 # fzf
 if command -v fzf &>/dev/null; then
-  export FZF_DEFAULT_COMMAND='fd -u'
+  if command -v fd &>/dev/null; then
+    export FZF_DEFAULT_COMMAND='fd --unrestricted'
+  else
+    export FZF_DEFAULT_COMMAND='find .'
+  fi
 fi
 
 # https://wiki.archlinux.org/title/Debuginfod
