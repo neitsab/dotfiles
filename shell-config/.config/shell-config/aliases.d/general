@@ -134,13 +134,16 @@ fi
 ## Incus
 if command-exists incus; then
     alias i='incus'
-    alias ils='i ls --columns ns4ts'
+    alias ils='i ls --columns ne4ts --all-projects'
+    alias ilsa='ils --all-remotes'
+
     function incus-docker-rebuild {
       for i in $@ ; do
           i rebuild docker:$(incus config show $i | awk '/image.id/ {print $2}') $i -f --debug
           i start $i
       done
     }
+
     function incus-gh-rebuild {
       for i in $@ ; do
           i rebuild ghcr:$(incus config show $i | awk '/image.id/ {print $2}') $i -f --debug
